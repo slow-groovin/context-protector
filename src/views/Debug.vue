@@ -23,10 +23,22 @@
               Database Tests (SQLocal + Drizzle + OPFS)
             </router-link>
             <router-link
+              to="/debug/drizzle-orm"
+              class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
+            >
+              Drizzle ORM Tests (Schema-Driven with Relations)
+            </router-link>
+            <router-link
               to="/debug/environment"
               class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
             >
               Environment Info
+            </router-link>
+            <router-link
+              to="/debug/opfs-viewer"
+              class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
+            >
+              OPFS Viewer (Origin Private File System)
             </router-link>
           </div>
         </div>

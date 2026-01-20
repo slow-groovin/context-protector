@@ -1,9 +1,10 @@
-import { drizzle } from 'drizzle-orm/sqlite-proxy';
-import { SQLocalDrizzle } from 'sqlocal/drizzle';
-import * as schema from './schema';
+import { drizzle } from "drizzle-orm/sqlite-proxy";
+import { SQLocalDrizzle } from "sqlocal/drizzle";
+import { sql } from "drizzle-orm";
+import * as schema from "./schema";
 
 // Database configuration
-const DB_NAME = 'context-protector.sqlite3';
+const DB_NAME = "context-protector.sqlite3";
 
 let db: ReturnType<typeof drizzle<typeof schema>> | null = null;
 let sqlocalDrizzle: SQLocalDrizzle | null = null;
@@ -15,29 +16,29 @@ let isInitialized = false;
  */
 export async function initDatabase(): Promise<typeof db> {
   if (isInitialized && db) {
-    console.log('Database already initialized');
+    console.log("Database already initialized");
     return db;
   }
 
   try {
-    console.log('Initializing database with SQLocal...');
-    
+    console.log("Initializing database with SQLocal...");
+
     // Create SQLocalDrizzle instance with OPFS support
     sqlocalDrizzle = new SQLocalDrizzle(DB_NAME);
-    
+
     // Enable better performance
     await sqlocalDrizzle.sql`PRAGMA journal_mode = WAL`;
     await sqlocalDrizzle.sql`PRAGMA synchronous = NORMAL`;
-    
+
     // Create Drizzle instance
     db = drizzle(sqlocalDrizzle.driver, { schema });
-    
+
     isInitialized = true;
-    console.log('Database initialized successfully with OPFS support');
-    
+    console.log("Database initialized successfully with OPFS support");
+
     return db;
   } catch (error) {
-    console.error('Failed to initialize database:', error);
+    console.error("Failed to initialize database:", error);
     throw error;
   }
 }
@@ -57,23 +58,24 @@ export async function getDatabase() {
  */
 export async function runMigrations() {
   try {
-    console.log('Running migrations...');
-    
-    if (!sqlocalDrizzle) {
-      throw new Error('SQLocalDrizzle not initialized');
+    console.log("Running migrations...");
+
+    const db = await getDatabase();
+    if (!db) {
+      throw new Error("Database not initialized");
     }
-    
-    // Create tables using SQLocalDrizzle
-    await sqlocalDrizzle.sql`
+
+    // Create tables using Drizzle run
+    await db.run(sql`
       CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
         created_at TEXT NOT NULL
       )
-    `;
-    
-    await sqlocalDrizzle.sql`
+    `);
+
+    await db.run(sql`
       CREATE TABLE IF NOT EXISTS tasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
@@ -83,9 +85,9 @@ export async function runMigrations() {
         created_at TEXT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users (id)
       )
-    `;
-    
-    await sqlocalDrizzle.sql`
+    `);
+
+    await db.run(sql`
       CREATE TABLE IF NOT EXISTS contexts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -93,14 +95,14 @@ export async function runMigrations() {
         content TEXT NOT NULL,
         created_at TEXT NOT NULL
       )
-    `;
-    
-    await sqlocalDrizzle.sql`CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id)`;
-    await sqlocalDrizzle.sql`CREATE INDEX IF NOT EXISTS idx_contexts_created_at ON contexts(created_at)`;
-    
-    console.log('Migrations completed successfully');
+    `);
+
+    await db.run(sql`CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id)`);
+    await db.run(sql`CREATE INDEX IF NOT EXISTS idx_contexts_created_at ON contexts(created_at)`);
+
+    console.log("Migrations completed successfully with Drizzle");
   } catch (error) {
-    console.error('Failed to run migrations:', error);
+    console.error("Failed to run migrations:", error);
     throw error;
   }
 }
@@ -110,18 +112,19 @@ export async function runMigrations() {
  */
 export async function resetDatabase() {
   try {
-    if (!sqlocalDrizzle) {
-      throw new Error('SQLocalDrizzle not initialized');
+    const db = await getDatabase();
+    if (!db) {
+      throw new Error("Database not initialized");
     }
-    
-    await sqlocalDrizzle.sql`DROP TABLE IF EXISTS contexts`;
-    await sqlocalDrizzle.sql`DROP TABLE IF EXISTS tasks`;
-    await sqlocalDrizzle.sql`DROP TABLE IF EXISTS users`;
-    
-    console.log('Database reset completed');
+
+    await db.run(sql`DROP TABLE IF EXISTS contexts`);
+    await db.run(sql`DROP TABLE IF EXISTS tasks`);
+    await db.run(sql`DROP TABLE IF EXISTS users`);
+
+    console.log("Database reset completed with Drizzle");
     isInitialized = false;
   } catch (error) {
-    console.error('Failed to reset database:', error);
+    console.error("Failed to reset database:", error);
     throw error;
   }
 }
@@ -136,9 +139,9 @@ export function closeDatabase() {
       sqlocalDrizzle = null;
       db = null;
       isInitialized = false;
-      console.log('Database connection closed');
+      console.log("Database connection closed");
     }
   } catch (error) {
-    console.error('Failed to close database:', error);
+    console.error("Failed to close database:", error);
   }
 }

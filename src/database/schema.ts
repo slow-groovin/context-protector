@@ -1,4 +1,5 @@
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { relations } from 'drizzle-orm';
 
 // User table
 export const users = sqliteTable('users', {
@@ -26,3 +27,15 @@ export const contexts = sqliteTable('contexts', {
   content: text('content').notNull(),
   createdAt: text('created_at').notNull(),
 });
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  tasks: many(tasks),
+}));
+
+export const tasksRelations = relations(tasks, ({ one }) => ({
+  user: one(users, {
+    fields: [tasks.userId],
+    references: [users.id],
+  }),
+}));
