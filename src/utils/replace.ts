@@ -74,15 +74,16 @@ export function applyReplace(input: string, rules: ReplaceRule[]): ReplaceResult
     });
   });
 
-  // 现在替换占位符为高亮HTML
-  console.log(`Replacing ${placeholders.length} placeholders with highlighted HTML`);
-  placeholders.forEach(({ id, target, ruleId }) => {
-    const hue = (ruleId * 49) % 360;
-    const bgColor = `hsl(${hue}, 70%, 90%)`;
-    const highlighted = `<span style="background-color: ${bgColor};">${escapeHtml(target)}</span>`;
-    console.log(`Replacing placeholder "${id}" with highlighted HTML for rule ${ruleId}: "${target}"`);
-    result = result.replace(new RegExp(escapeRegExp(id), 'g'), highlighted);
-  });
+   // 现在替换占位符为高亮HTML
+   console.log(`Replacing ${placeholders.length} placeholders with highlighted HTML`);
+   placeholders.forEach(({ id, target, ruleId }) => {
+     const hue = (ruleId * 49) % 360;
+     const bgColor = `hsl(${hue}, 85%, 95%)`;
+     const borderColor = `hsl(${hue}, 70%, 70%)`;
+     const highlighted = `<span style="background-color: ${bgColor}; border: 1px solid ${borderColor}; border-radius: 4px; padding: 2px 4px; margin: 0 1px; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-weight: 500;">${escapeHtml(target)}</span>`;
+     console.log(`Replacing placeholder "${id}" with highlighted HTML for rule ${ruleId}: "${target}"`);
+     result = result.replace(new RegExp(escapeRegExp(id), 'g'), highlighted);
+   });
 
   console.log(`Replace process completed. Final result length: ${result.length}, history entries: ${history.length}`);
   return { result, history };

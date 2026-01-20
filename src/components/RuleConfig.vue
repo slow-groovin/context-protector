@@ -1,13 +1,13 @@
 <template>
-    <details class="bg-white rounded-lg shadow p-6 mb-6">
-        <summary class="cursor-pointer text-xl font-semibold mb-4">
+    <details class="bg-white rounded-lg shadow p-2 mb-2">
+        <summary class="cursor-pointer text-xl font-semibold mb-2">
             规则配置
         </summary>
 
         <!-- Add New Rule Form -->
-        <div class="mb-6 p-4 border border-gray-200 rounded-lg">
-            <h3 class="text-lg font-medium mb-4">添加新规则</h3>
-            <form @submit.prevent="handleAddRule" class="space-y-4">
+        <div class="mb-4 p-2 border border-gray-200 rounded-lg">
+            <h3 class="text-lg font-medium mb-2">添加新规则</h3>
+            <form @submit.prevent="handleAddRule" class="space-y-2">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-1"
@@ -66,7 +66,7 @@
         </div>
 
         <!-- Rules List -->
-        <div class="space-y-4">
+        <div class="space-y-2">
             <h3 class="text-lg font-medium">当前规则</h3>
             <div v-if="rulesStore.isLoading" class="text-gray-500 italic">
                 加载中...
@@ -86,7 +86,7 @@
                 <!-- Rule Display -->
                 <div
                     v-if="!rule.isEditing"
-                    class="p-4 cursor-pointer hover:bg-gray-50"
+                    class="p-2 cursor-pointer hover:bg-gray-50"
                     @click="startEdit(rule)"
                 >
                     <div class="flex items-start">
@@ -139,10 +139,10 @@
                 </div>
 
                 <!-- Edit Form -->
-                <div v-else class="p-4 border-t border-gray-200">
+                <div v-else class="p-2 border-t border-gray-200">
                     <form
                         @submit.prevent="handleUpdateRule(rule)"
-                        class="space-y-4"
+                        class="space-y-2"
                     >
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>

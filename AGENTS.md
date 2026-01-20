@@ -1,6 +1,6 @@
 ## orders
 - 使用 `npm run tsc`验证代码是否正确编译
-- 作者已经启动了 npm run dev http://localhost:5173, 需要时直接访问, 不必单独额外启动
+- 无需再启动开发服务器, 作者已经启动了 npm run dev http://localhost:5173, 需要时直接访问, 不必单独额外启动
 
 
 ## current stages
