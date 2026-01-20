@@ -96,7 +96,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRulesStore } from "../stores/rules";
-import { initDatabase, runMigrations, getDatabase } from "../database/index";
+import { initDatabase, runMigrations } from "../database/index";
 import RuleConfig from "../components/RuleConfig.vue";
 import { applyReplace, type ReplaceResult } from "../utils/replace";
 
@@ -104,7 +104,7 @@ const rulesStore = useRulesStore();
 
 const inputText = ref("");
 const outputText = ref("");
-const inputTextarea = ref<HTMLTextAreaElement>();
+// const inputTextarea = ref<HTMLTextAreaElement>();
 const outputContainer = ref<HTMLDivElement>();
 const autoCopy = ref(false);
 const replaceCount = ref(0);

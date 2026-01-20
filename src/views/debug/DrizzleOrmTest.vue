@@ -158,7 +158,7 @@ const testCRUD = async () => {
 
         // Create a test user
         const newUser = await db
-            .insert(users)
+            .insert(debugUsers)
             .values({
                 name: "Drizzle User",
                 email: `drizzle-${Date.now()}@example.com`,

@@ -241,17 +241,17 @@ const newRule = reactive({
 });
 
 // Extend rule with edit properties
-const extendRuleForEdit = (rule: ReplaceRule) => {
-    return {
-        ...rule,
-        isEditing: false,
-        editNote: rule.note || "",
-        editMatchType: rule.matchType,
-        editMatchValue: rule.matchValue,
-        editTargetValue: rule.targetValue,
-        isUpdating: false,
-    };
-};
+// const extendRuleForEdit = (rule: ReplaceRule) => {
+//     return {
+//         ...rule,
+//         isEditing: false,
+//         editNote: rule.note || "",
+//         editMatchType: rule.matchType,
+//         editMatchValue: rule.matchValue,
+//         editTargetValue: rule.targetValue,
+//         isUpdating: false,
+//     };
+// };
 
 const handleAddRule = async () => {
     if (!newRule.matchValue.trim() || !newRule.targetValue.trim()) return;
