@@ -24,52 +24,67 @@ export interface ReplaceHistoryEntry {
 }
 
 export function applyReplace(input: string, rules: ReplaceRule[]): ReplaceResult {
-  let result = input;
+  console.log(`Starting replace process with input: "${input}"`);
+  console.log(`Number of rules: ${rules.length}`);
+  // Escape HTML in input to display as code
+  let result = escapeHtml(input);
   const placeholders: { id: string; target: string; ruleId: number; originalMatch: string; originalMatchType: 'fixed' | 'regex' }[] = [];
   const history: ReplaceHistoryEntry[] = [];
 
   rules.forEach((rule, index) => {
     const { match, target } = rule;
+    console.log(`Processing rule ${rule.id}: match "${match.value}" (${match.type}) -> target "${target.value}"`);
     let regex: RegExp;
     if (match.type === 'regex') {
       regex = new RegExp(match.value, 'g');
     } else {
-      regex = new RegExp(escapeRegExp(match.value), 'g');
+      // For fixed matches, also escape to match in escaped input
+      regex = new RegExp(escapeRegExp(escapeHtml(match.value)), 'g');
     }
+    console.log(`Generated regex: ${regex}`);
     // 使用占位符先替换
     const placeholder = `__REPLACE_${index}__`;
+    let matchCount = 0;
     result = result.replace(regex, (matchStr) => {
+      matchCount++;
       const uniqueId = `${placeholder}_${placeholders.length}`;
+      console.log(`Match ${matchCount} for rule ${rule.id}: "${matchStr}" -> placeholder "${uniqueId}"`);
       placeholders.push({
         id: uniqueId,
-        target: target.value,
+        target: escapeHtml(target.value),
         ruleId: rule.id,
-        originalMatch: matchStr,
+        originalMatch: unescapeHtml(matchStr),
         originalMatchType: match.type
       });
       return uniqueId;
     });
+    console.log(`Rule ${rule.id} processed, matches found: ${matchCount}`);
   });
 
   // 收集历史记录
+  console.log(`Collecting history from ${placeholders.length} placeholders`);
   placeholders.forEach(({ originalMatch, originalMatchType, target, ruleId }) => {
+    console.log(`History entry: "${originalMatch}" (${originalMatchType}) -> "${unescapeHtml(target)}" (rule ${ruleId})`);
     history.push({
       originalMatch,
       originalMatchType,
-      replacedWith: target,
+      replacedWith: unescapeHtml(target),
       replacedWithType: 'fixed',
       ruleId
     });
   });
 
   // 现在替换占位符为高亮HTML
+  console.log(`Replacing ${placeholders.length} placeholders with highlighted HTML`);
   placeholders.forEach(({ id, target, ruleId }) => {
     const hue = (ruleId * 49) % 360;
     const bgColor = `hsl(${hue}, 70%, 90%)`;
     const highlighted = `<span style="background-color: ${bgColor};">${escapeHtml(target)}</span>`;
+    console.log(`Replacing placeholder "${id}" with highlighted HTML for rule ${ruleId}: "${target}"`);
     result = result.replace(new RegExp(escapeRegExp(id), 'g'), highlighted);
   });
 
+  console.log(`Replace process completed. Final result length: ${result.length}, history entries: ${history.length}`);
   return { result, history };
 }
 
@@ -84,6 +99,15 @@ function escapeHtml(unsafe: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+function unescapeHtml(safe: string): string {
+  return safe
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
 }
 
 // Default rules for testing
