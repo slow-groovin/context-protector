@@ -3,17 +3,23 @@
 - 然后才能使用 `npm run build:dev`验证代码是否正确运行
 
 
+要求:
+- 追求极致的代码质量,代码整洁程度,  单一职责原则
+- 生成的代码应该有清晰适当的注释
+
+
 ## TODO
 - [x] 复制成功notify
+- [ ] 查找上/下一个替换 按钮, 点击时的反馈:应该有bounce效果
 - [] Replace按钮靠右,Replace按钮旁边clear按钮
 - [] Next/Previous 快捷键
 - [] 规则配置页面, 悬浮式下拉, 而不是扩展元素高度
 - [] 设计: 顶部Icon(text)右下方小字站点名(import.meta.vite_site_name)
-- [] 设计: 顶部留出github link, offline(no internet)说明, download按钮
+- [] 设计: 顶部Icon右侧留出github link, offline(no internet)说明, download按钮
 - [] 支持pwa
-- [] 支持single html, 打包至静态资源目录, 作为下载连接
+- [] 支持single html, 添加流程:打包至静态资源目录, 作为下载连接
 - [] 配置 剪切板导入/导出 以context-protector:// 开头
-- [] 实现restore功能, 交互逻辑: replace右侧在任务创建后且有效(左侧input栏目没有变动)时出现restore按钮, 点击restore按钮,  右侧(是的,复用了)显示内容
+- [] 实现restore功能, 交互逻辑: replace后, 在任务创建后且有效(左侧input栏目没有变动编辑)时出现restore按钮(在左侧栏), 点击restore按钮,  右侧(是的,复用了)显示restore内容
 ## current stages
 当前是正式实现阶段
 
