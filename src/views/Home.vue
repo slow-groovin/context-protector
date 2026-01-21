@@ -36,7 +36,7 @@
           <div class="flex flex-col">
             <!-- Control Panel -->
             <div
-              class="flex items-center justify-between mb-4 bg-gray-50 rounded-lg"
+              class="sticky top-10 flex items-center justify-between mb-1 bg-white/50 border-gray-300 rounded-lg pb-2 pt-1 px-3"
             >
               <div class="flex items-center">
                 <button
