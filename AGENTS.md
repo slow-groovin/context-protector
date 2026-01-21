@@ -1,8 +1,21 @@
-## orders
+## NOTES
 - 使用 `npm run tsc`验证代码是否正确编译
 - 无需再启动开发服务器, 作者已经启动了 npm run dev http://localhost:5173, 需要时直接访问, 不必单独额外启动
 
 
+## TODO
+- [] 复制成功notify
+- [] 替换按钮
+- [] Replace按钮靠右
+- [] Replace按钮旁边clear按钮
+- [] Next/Previous 快捷键
+- [] 规则配置页面, 悬浮式下拉, 而不是扩展元素高度
+- [] 设计: 顶部Icon(text)右下方小字站点名(import.meta.vite_site_name)
+- [] 设计: 顶部留出github link, offline(no internet)说明, download按钮
+- [] 支持pwa
+- [] 支持single html, 打包至静态资源目录, 作为下载连接
+- [] 配置 剪切板导入/导出 以context-protector:// 开头
+- [] 实现restore功能, 交互逻辑: replace右侧在任务创建后且有效(左侧input栏目没有变动)时出现restore按钮, 点击restore按钮,  右侧(是的,复用了)显示内容
 ## current stages
 当前是正式实现阶段
 
@@ -31,6 +44,10 @@
 ```
 
 ## 任务
+### 任务12
+1. []自动复制 改为localStorage存储
+2. debug: 所有tables列表+内容查询
+3. 当前规则, 第一次打开较慢, 增加日志供人工排查
 ### 任务11
 > 可以参考Replace.vue(试验版本)
 实现主页, 以及功能入口:
