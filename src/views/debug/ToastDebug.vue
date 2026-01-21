@@ -290,7 +290,7 @@ const showPromiseSuccess = () => {
 };
 
 const showPromiseError = () => {
-  const promise = new Promise((resolve, reject) => {
+  const promise = new Promise((_, reject) => {
     setTimeout(() => reject(new Error("Network error")), 2000);
   });
 
