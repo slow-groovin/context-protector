@@ -3,17 +3,12 @@ import { SQLocalDrizzle } from "sqlocal/drizzle";
 import { sql } from "drizzle-orm";
 import * as schema from "./schema";
 
-// Database configuration
 const DB_NAME = "context-protector.sqlite3";
 
 let db: ReturnType<typeof drizzle<typeof schema>> | null = null;
 let sqlocalDrizzle: SQLocalDrizzle | null = null;
 let isInitialized = false;
 
-/**
- * Initialize database connection
- * Uses OPFS for storage in supported browsers
- */
 export async function initDatabase(): Promise<typeof db> {
   if (isInitialized && db) {
     console.log("Database already initialized");
@@ -21,38 +16,70 @@ export async function initDatabase(): Promise<typeof db> {
   }
 
   try {
-    console.log("Initializing database with SQLocal...");
+    console.log("🔄 Initializing database...");
 
-    // Create SQLocalDrizzle instance with OPFS support
+    // ⚠️ 关键修复1: 等待浏览器释放之前的 Access Handle
+    // 刷新页面后需要等待旧句柄完全释放
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+
     sqlocalDrizzle = new SQLocalDrizzle(DB_NAME);
 
-    // Enable better performance
+    // ⚠️ 关键修复2: 等待 worker 就绪并处理冲突重试
+    let retries = 0;
+    const maxRetries = 20;
+
+    while (retries < maxRetries) {
+      try {
+        await sqlocalDrizzle.sql`SELECT 1`;
+        console.log("✅ Worker ready");
+        break;
+      } catch (e: any) {
+        retries++;
+
+        // 检测 Access Handle 冲突
+        const isAccessHandleError =
+          e.message?.includes("Access Handle") ||
+          e.message?.includes("createSyncAccessHandle") ||
+          e.message?.includes("NoModificationAllowedError");
+
+        if (isAccessHandleError) {
+          console.warn(
+            `⚠️ Access Handle 冲突,等待释放... (${retries}/${maxRetries})`,
+          );
+          // Access Handle 冲突需要更长等待
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+
+        if (retries >= maxRetries) {
+          console.error("❌ 初始化超时");
+          throw new Error("数据库初始化超时,请刷新页面重试");
+        }
+      }
+    }
+
+    // 优化设置
     await sqlocalDrizzle.sql`PRAGMA journal_mode = WAL`;
     await sqlocalDrizzle.sql`PRAGMA synchronous = NORMAL`;
 
-    // Create Drizzle instance
     db = drizzle(sqlocalDrizzle.driver, { schema });
-
     isInitialized = true;
-    console.log("Database initialized successfully with OPFS support");
 
+    console.log("✅ Database initialized successfully");
     return db;
   } catch (error) {
-    console.error("Failed to initialize database:", error);
+    console.error("❌ Failed to initialize database:", error);
     throw error;
   }
 }
 
-/**
- * Get database instance
- */
 export async function getDatabase() {
   if (!db) {
     return await initDatabase();
   }
   return db;
 }
-
 /**
  * Run database migrations
  */
@@ -158,19 +185,27 @@ export async function resetDatabase() {
   }
 }
 
-/**
- * Close database connection
- */
 export function closeDatabase() {
   try {
     if (sqlocalDrizzle) {
-      // SQLocal doesn't require explicit closing
       sqlocalDrizzle = null;
       db = null;
       isInitialized = false;
-      console.log("Database connection closed");
+      console.log("✅ Database connection closed");
     }
   } catch (error) {
     console.error("Failed to close database:", error);
   }
+}
+
+// ⚠️ 关键修复3: 页面卸载时关闭数据库
+if (typeof window !== "undefined") {
+  window.addEventListener("beforeunload", () => {
+    closeDatabase();
+  });
+
+  // 页面隐藏时也关闭(针对移动端)
+  window.addEventListener("pagehide", () => {
+    closeDatabase();
+  });
 }

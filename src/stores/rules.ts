@@ -104,10 +104,16 @@ export const useRulesStore = defineStore("rules", () => {
     if (rules.value.length === 0) {
       const defaultRules: Omit<ReplaceRule, "id" | "createdAt">[] = [
         {
-          note: "示例：固定字符串替换",
+          note: "示例：Windows 用户路径替换",
           matchType: "fixed",
-          matchValue: "world",
-          targetValue: "世界",
+          matchValue: "/xx/documents",
+          targetValue: "/samaltman/documents",
+        },
+        {
+          note: "示例：Linux 用户路径替换",
+          matchType: "fixed",
+          matchValue: "/home/xx/",
+          targetValue: "/home/samaltman/",
         },
         {
           note: "示例：正则表达式替换",
