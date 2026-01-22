@@ -9,8 +9,9 @@ import { viteSingleFile } from "vite-plugin-singlefile";
 export default defineConfig(({ mode }) => ({
   server: {
     headers: {
-      "Cross-Origin-Embedder-Policy": "require-corp",
+      // "Cross-Origin-Embedder-Policy": "require-corp",
       "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "credentialless", // 更宽松
     },
   },
   optimizeDeps: {

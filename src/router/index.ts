@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import Help from '../views/Help.vue'
 import Debug from '../views/Debug.vue'
 import DatabaseTest from '../views/debug/DatabaseTest.vue'
 import DrizzleOrmTest from '../views/debug/DrizzleOrmTest.vue'
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component: Help
     },
     {
       path: '/debug',
