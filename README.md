@@ -1,92 +1,56 @@
+# Context Protector
 
-## 产品功能介绍：Context Protector (web) - 用于使用大模型网站粘贴内容前的隐私保护工具
 
-**产品概述**  
-专为用户在使用大模型AI（如ChatGPT或Grok）时保护敏感上下文而设计。它允许用户通过自定义规则搜索并替换文本中的关键数据（如IP地址、包名、个人信息或公司关键字），从而隐藏潜在的隐私风险。整个过程纯程序化处理，无需神经网络、AI模型或任何远程服务，确保数据完全本地化且安全。软件采用简洁的界面，支持剪贴板集成，便于快速操作。核心功能包括文本匿名化替换和可选的可逆还原，帮助用户在AI交互中维护隐私，同时保持内容的可读性和实用性。
+![Context Protector](/public/icon-512.png)
 
-**主要功能**  
-1. **自定义规则设置**  
-   - 用户可以创建和管理多条规则，用于检测特定文本模式。  
-   - 支持正则表达式（Regex）或关键词匹配，针对如IP地址（e.g., 192.168.1.1）、包名（e.g., com.example.app）、姓名、公司名等关键数据。  
-   - 规则可灵活配置
 
-2. **文本搜索与替换**  
-   - 用户在将内容粘贴至chatgpt/gemini/claude的输入框前, 将内容粘贴至本网页的输入框内, 扫描输入文本，基于规则识别替换敏感关键字。  
-   - 替换选项包括：  
-     - **固定内容**：用预设字符串直接替换。  
-     - **随机内容**：生成随机字符串替换（如随机IP格式的伪值）。  
-     - **Mock内容**：使用模拟数据替换（如Faker-style的假IP、假包名，确保格式相似但非真实）。  
-   - 替换内容显示,左侧input框, 右侧同步高亮显示替换的部分
-3. **剪贴板集成交互流程**  
-   - 用户将原始内容复制到软件界面后, 替换后的文本, 直接写入到剪贴板导入。  
+**Protect your privacy when using AI models**
 
-4. **可选：可逆还原功能**  
-   - 在替换过程中，软件自动记录(此次任务)映射关系（e.g., 原始值与替换值的键值对），存储在本地(浏览器)文件中。  
-   - 用户可将AI输出的响应文本粘贴回软件，根据记录自动还原原始关键字。  (有一个还原按钮, 点击后, 读取剪切板, 并切换到 还原编辑模式(还是左右两栏))
-   - 支持设置是否保存历史, 保存多少条历史(自动删除x条之前的历史)
-   - 查看任务历史界面  
+**Replace your sensitive data before pasting it to ChatGPT, Claude, Gemini, or any other AI sites**
 
-**技术特性**  
-- **纯本地运行**：无网络依赖，所有处理在用户设备上完成，支持Windows、macOS、Linux（桌面版）, 当前是浏览器  
-- **开源与扩展性**：基于MIT许可，完全开源，用户可自定义源代码。无任何神经网络或外部API依赖，仅使用标准编程库。  
-- **用户界面**：简易GUI设计，规则编辑器和预览窗口。
-- **安全性**：所有数据不离开设备。  
+[Live Demo](https://context-protector.api2o.com) | [中文文档](./README_CN.md) 
 
-**适用场景**  
-任何使用大模型网站服务的人, 在粘贴某些内容到大模型时:
-- 开发者在分享代码片段到AI时隐藏包名或API密钥。  
-- 企业用户在咨询AI时保护公司内部信息。  
-- 个人用户避免在AI对话中暴露IP、邮箱等隐私数据。  
 
-## 技术架构
+## ✨ Why Context Protector?
 
-### 数据库技术栈
-本项目使用 **SQLocal + Drizzle ORM + OPFS** 构建浏览器端本地数据库：
+When using AI sites like ChatGPT, Claude, or Gemini, you often need to share code snippets, logs, or documents that may contain sensitive informations. Context Protector helps you redact them.
 
-- **SQLocal**: 提供基于 Origin Private File System (OPFS) 的 SQLite 数据库引擎
-- **Drizzle ORM**: 类型安全的 TypeScript ORM，提供类型检查和 SQL 查询构建
-- **OPFS**: 浏览器原生 API，提供私有、持久化的文件系统访问
+- 🎯 **Precision Control** - Use regex or exact text matching for perfect replacements
+- 🚀 **Work Faster** - Paste, replace, and copy in seconds
+- 💾 **Work Offline** - Everything runs locally in your browser.
 
-### 数据库配置
-```typescript
-// 初始化数据库
-import { SQLocalDrizzle } from 'sqlocal/drizzle';
-import { drizzle } from 'drizzle-orm/sqlite-proxy';
+## 🚀 Installation and Usage
 
-const { driver } = new SQLocalDrizzle('context-protector.sqlite3');
-const db = drizzle(driver, { schema });
-```
+### 🌐 Online (Recommended)
+Simply visit [https://context-protector.api2o.com](https://context-protector.api2o.com) and start using immediately - no installation required.
 
-### 数据表结构
-- **users**: 用户信息表
-- **tasks**: 任务表（关联用户）
-- **contexts**: 上下文保护规则表
+### 📱 PWA Installation
+1. Visit the web app
+2. Click the "Install" button in your browser's address bar
+3. Use it like a native app with offline support
 
-### 调试模式
-项目支持环境变量控制的调试模式：
-- 开发环境：`VITE_DEBUG_MODE=true`（显示调试页面和导航）
-- 生产环境：`VITE_DEBUG_MODE=false`（隐藏调试功能）
+### 📦 Local Deployment
+Clone, build and deploy locally.
 
-调试页面提供以下功能：
-- 数据库初始化测试
-- 迁移执行测试
-- CRUD 操作测试
-- 数据库重置功能
-- OPFS 支持检测
+## 📊 Data Storage
 
-**安装与使用**  
-1. 通过域名打开作者部署的站点
-2. 在站点上的下载按钮或github页面中,  下载静态页面html, 本地打开使用
-3. service worker
+Context Protector stores all your data locally in your browser using the **Origin Private File System (OPFS)**.
 
-### 开发环境设置
+## 🛠️ Development Setup
 ```bash
-# 安装依赖
+# Clone the repository
+git clone https://github.com/slow-groovin/context-protector-web.git
+cd context-protector-web
+
+# Install dependencies
 npm install
 
-# 开发模式（包含调试页面）
+# Start development server
 npm run dev
 
-# 生产构建
+# Build for production
 npm run build
+
+# Run tests
+npm test
 ```
