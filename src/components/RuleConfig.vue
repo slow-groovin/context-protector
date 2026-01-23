@@ -367,9 +367,11 @@ const newRule = reactive({
   targetValue: "",
 });
 
-onMounted(() => {
+onMounted(async () => {
+  await rulesStore.loadRules();
   const stored = localStorage.getItem("ruleConfigFirstUse");
   if (stored === null) {
+    await rulesStore.initializeDefaultRules();
     isOpen.value = true;
     localStorage.setItem("ruleConfigFirstUse", "used");
     // @ts-ignore

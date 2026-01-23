@@ -101,7 +101,8 @@ export const useRulesStore = defineStore("rules", () => {
 
   // Initialize with default rules if none exist
   const initializeDefaultRules = async () => {
-    if (rules.value.length === 0) {
+    const stored = localStorage.getItem("ruleConfigFirstUse");
+    if (stored === null) {
       const defaultRules: Omit<ReplaceRule, "id" | "createdAt">[] = [
         {
           note: "eg. Windows user path",
