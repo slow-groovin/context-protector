@@ -1,7 +1,10 @@
 <template>
+  <!-- //TODO 这里改成超链接方式, 方便seo跳转 -->
   <div class="goback-link">
     <button @click="$router.go(-1)" class="goback-button">← Back</button>
   </div>
+
+  <!-- TODO 这里加一些功能文字说明  -->
   <div class="flex justify-center items-center min-h-screen">
     <div class="browser-window">
       <!-- Browser Header -->
@@ -67,7 +70,7 @@ const posterSrc =
 .browser-window {
   /*width: vw;*/
   aspect-ratio: 16/9;
-  height: 60vh;
+  min-height: 60vh;
 
   background: #f0f0f0;
   display: flex;
@@ -75,7 +78,7 @@ const posterSrc =
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  margin: 20px;
+  margin: 4rem;
 }
 
 .browser-header {

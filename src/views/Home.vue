@@ -40,6 +40,12 @@
                 />
               </svg>
             </a>
+
+            <!-- 语言切换 -->
+            <LanguageSwitcher
+              class="size-8 p-1 bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900 rounded-md"
+            />
+
             <router-link
               to="/help"
               class="size-7 bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900 rounded-md flex items-center justify-center text-sm font-bold transition-colors"
@@ -47,21 +53,6 @@
             >
               ?
             </router-link>
-
-            <!-- 语言切换 -->
-            <select
-              :value="locale"
-              @change="setLocale(($event?.target as any).value)"
-              class="px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900 rounded-md border-none outline-none"
-            >
-              <option
-                v-for="lang in availableLocales"
-                :key="lang"
-                :value="lang"
-              >
-                {{ lang }}
-              </option>
-            </select>
           </div>
         </div>
 
@@ -274,11 +265,11 @@ import { toast } from "vue-sonner";
 import { handleKeyboardShortcuts } from "../utils/shortcuts";
 import { sleep } from "radash";
 import { useI18n } from "../composables/useI18n";
-
+import LanguageSwitcher from "../components/LanguageSwitcher.vue";
 // --- State & Constants ---
 const siteName = import.meta.env.VITE_SITE_NAME || "Context Protector";
 const rulesStore = useRulesStore();
-const { locale, setLocale, availableLocales, t } = useI18n();
+const { t } = useI18n();
 
 // UI References
 const inputText = ref("");
