@@ -43,7 +43,7 @@
 
             <!-- Language Switch -->
             <LanguageSwitcher
-              class="size-8 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md"
+              class="size-7 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md"
             />
 
             <router-link

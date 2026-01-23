@@ -76,7 +76,9 @@
 
     <div class="mt-3 space-y-2 pl-2">
       <!-- 1. Add New Rule (Strict Single Row) -->
-      <div class="border border-green-200 rounded p-1 bg-green-50/30">
+      <div
+        class="border border-green-200 rounded p-1 bg-green-200/60 dark:bg-gray-300/30"
+      >
         <form @submit.prevent="handleAddRule" class="flex items-center gap-1">
           <!-- Type Select -->
           <select
@@ -174,7 +176,7 @@
           <!-- View Mode (Single Row) -->
           <div
             v-if="!rule.isEditing"
-            class="flex items-center gap-2 p-1.5 pl-2"
+            class="flex justify-start items-center gap-2 py-0.5 pl-2"
           >
             <!-- Type Badge -->
             <span
@@ -191,19 +193,19 @@
             <!-- Match Content (Truncated) -->
             <div class="flex-1 min-w-0" :title="rule.matchValue">
               <div
-                class="truncate text-sm font-mono text-black bg-pink-50 rounded px-1"
+                class="truncate text-sm font-mono bg-pink-200/36 dark:bg-pink-300/60 rounded px-1"
               >
                 {{ rule.matchValue }}
               </div>
             </div>
 
             <!-- Arrow -->
-            <span class="text-gray-300 shrink-0">→</span>
+            <span class="shrink-0 font-extrabold">→</span>
 
             <!-- Target Content (Truncated) -->
             <div class="flex-1 min-w-0" :title="rule.targetValue">
               <div
-                class="truncate text-sm font-mono text-black bg-green-50 rounded px-1"
+                class="truncate text-sm font-mono bg-green-300/33 dark:bg-green-600/30 rounded px-1"
               >
                 {{ rule.targetValue || "(空)" }}
               </div>
@@ -211,7 +213,7 @@
 
             <!-- Note (Visible if short, truncated if long) -->
             <div
-              class="w-20 text-xs text-foreground-secondary truncate text-right shrink-0"
+              class="w-32 text-foreground-secondary truncate text-right shrink-0"
               :title="rule.note"
             >
               {{ rule.note }}
@@ -266,7 +268,7 @@
           <form
             v-else
             @submit.prevent="handleUpdateRule(rule)"
-            class="flex items-center gap-1 p-1 bg-blue-50 rounded"
+            class="flex items-center gap-1 p-1 rounded dark:bg-gray-300/30"
           >
             <select
               v-model="rule.editMatchType"
