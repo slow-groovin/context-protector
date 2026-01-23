@@ -1,6 +1,6 @@
 <template>
   <details
-    class="bg-white rounded-lg p-2 mb-2 group border border-gray-200"
+    class="bg-background rounded-lg p-2 mb-2 group border border-border"
     :open="isOpen"
     @toggle="
       (event) => {
@@ -13,10 +13,10 @@
       class="list-none flex items-center justify-between cursor-pointer select-none p-1"
     >
       <!-- Left: Arrow + Title -->
-      <div class="flex items-center gap-2 text-lg font-semibold text-gray-800">
+      <div class="flex items-center gap-2 text-lg font-semibold text-foreground">
         <!-- Custom Triangle Arrow to ensure flex layout works perfectly -->
         <svg
-          class="w-3 h-3 text-gray-500 transition-transform duration-200 transform group-open:rotate-90"
+          class="w-3 h-3 text-foreground-secondary transition-transform duration-200 transform group-open:rotate-90"
           viewBox="0 0 24 24"
           fill="currentColor"
         >
@@ -29,7 +29,7 @@
       <div class="flex gap-2" @click.stop v-if="isOpen">
         <button
           @click="importConfig"
-          class="flex items-center gap-1 px-2 py-1 text-xs bg-gray-50 border border-gray-300 rounded text-gray-600 hover:text-blue-600 hover:border-blue-400 hover:bg-white transition"
+          class="flex items-center gap-1 px-2 py-1 text-xs bg-background-secondary border border-border rounded text-foreground-secondary hover:text-blue-600 hover:border-blue-400 hover:bg-background transition"
           title="读取剪切板内容并导入"
         >
           <svg
@@ -50,7 +50,7 @@
         </button>
         <button
           @click="exportConfig"
-          class="flex items-center gap-1 px-2 py-1 text-xs bg-gray-50 border border-gray-300 rounded text-gray-600 hover:text-blue-600 hover:border-blue-400 hover:bg-white transition"
+          class="flex items-center gap-1 px-2 py-1 text-xs bg-background-secondary border border-border rounded text-foreground-secondary hover:text-blue-600 hover:border-blue-400 hover:bg-background transition"
           title="导出配置到剪切板"
         >
           <svg
@@ -79,7 +79,7 @@
           <!-- Type Select -->
           <select
             v-model="newRule.matchType"
-            class="w-16 p-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-green-500 bg-white"
+            class="w-16 p-1 text-xs border border-border rounded focus:ring-1 focus:ring-green-500 bg-background"
             title="匹配类型"
           >
              <option value="fixed">{{ t.text }}</option>
@@ -92,13 +92,13 @@
               v-model="newRule.matchValue"
               rows="1"
               required
-              class="w-full p-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
+              class="w-full p-1 text-sm border border-border rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
                :placeholder="t.matchValue"
             ></textarea>
           </div>
 
           <!-- Arrow Icon -->
-          <div class="text-gray-400 shrink-0">
+          <div class="text-foreground-secondary shrink-0">
             <svg
               class="w-4 h-4"
               fill="none"
@@ -119,7 +119,7 @@
             <textarea
               v-model="newRule.targetValue"
               rows="1"
-              class="w-full p-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
+              class="w-full p-1 text-sm border border-border rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
                :placeholder="t.replaceWith"
             ></textarea>
           </div>
@@ -128,7 +128,7 @@
           <input
             v-model="newRule.note"
             type="text"
-            class="flex-1 min-w-[7ch] p-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-green-500"
+            class="flex-1 min-w-[7ch] p-1 text-xs border border-border rounded focus:ring-1 focus:ring-green-500"
             placeholder="备注"
           />
 
@@ -157,17 +157,17 @@
 
       <!-- 2. Rules List (Strict Single Row) -->
       <div class="space-y-1">
-        <div
-          v-if="rulesStore.rules.length === 0"
-          class="text-center text-gray-400 text-sm py-2"
-        >
+          <div
+            v-if="rulesStore.rules.length === 0"
+            class="text-center text-foreground-secondary text-sm py-2"
+          >
            {{ t.noRules }}
         </div>
 
         <div
           v-for="rule in rulesStore.rules as EditableReplaceRule[]"
           :key="rule.id"
-          class="group/item bg-white border border-gray-200 rounded hover:border-blue-300 transition-colors"
+          class="group/item bg-background border border-border rounded hover:border-blue-300 transition-colors"
         >
           <!-- View Mode (Single Row) -->
           <div
@@ -180,7 +180,7 @@
                 'shrink-0 px-1 rounded text-[10px] font-mono border',
                 rule.matchType === 'regex'
                   ? 'bg-purple-50 text-purple-700 border-purple-100'
-                  : 'bg-gray-50 text-gray-600 border-gray-200',
+                  : 'bg-background-secondary text-foreground-secondary border-border',
               ]"
             >
               {{ rule.matchType === "regex" ? "Reg" : "Txt" }}
@@ -209,7 +209,7 @@
 
             <!-- Note (Visible if short, truncated if long) -->
             <div
-              class="w-20 text-xs text-gray-400 truncate text-right shrink-0"
+              class="w-20 text-xs text-foreground-secondary truncate text-right shrink-0"
               :title="rule.note"
             >
               {{ rule.note }}
@@ -268,7 +268,7 @@
           >
             <select
               v-model="rule.editMatchType"
-              class="w-14 p-1 text-xs border border-blue-200 rounded bg-white"
+              class="w-14 p-1 text-xs border border-blue-200 rounded bg-background"
             >
               <option value="fixed">Txt</option>
               <option value="regex">Reg</option>

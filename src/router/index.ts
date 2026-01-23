@@ -8,6 +8,7 @@ import EnvironmentInfo from '../views/debug/EnvironmentInfo.vue'
 import OpfsViewer from '../views/debug/OpfsViewer.vue'
 import Replace from '../views/debug/Replace.vue'
 import ToastDebug from '../views/debug/ToastDebug.vue'
+import ColorTest from '../views/debug/ColorTest.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,11 @@ const router = createRouter({
       path: '/debug/toast',
       name: 'toast-debug',
       component: ToastDebug
+    },
+    {
+      path: '/debug/color-test',
+      name: 'color-test',
+      component: ColorTest
     }
   ]
 })

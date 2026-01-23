@@ -1,10 +1,16 @@
 <template>
   <!-- //TODO Change to hyperlink method for better SEO -->
-  <div class="goback-link">
-    <button @click="$router.go(-1)" class="goback-button">← Back</button>
+  <div class="p-6">
+    <router-link to="/" class="hover:underline">← Back</router-link>
   </div>
 
-  <!-- TODO Add some functional description here -->
+  <div class="help-description">
+    <h1>Help & Tutorial</h1>
+    <p>
+      This video demonstrates how to use Context Protector to replace sensitive
+      information in your text using customizable rules.
+    </p>
+  </div>
   <div class="flex justify-center items-center min-h-screen">
     <div class="browser-window">
       <!-- Browser Header -->
@@ -46,25 +52,20 @@ const posterSrc =
 </script>
 
 <style scoped>
-.goback-link {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 10;
+.help-description {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.goback-button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
+.help-description h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
 }
 
-.goback-button:hover {
-  background: #0056b3;
+.help-description p {
+  font-size: 1rem;
+  color: #666;
 }
 
 .browser-window {

@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+/*
+  Tailwind v4 新特性：@theme
+  在这里定义的变量会自动成为 utility class (如 bg-background, text-border 等)
+*/
+@theme {
+  /* 定义颜色映射：将 CSS 变量映射为 Tailwind 颜色 */
+  /* 使用 rgb() 包裹变量以支持透明度修饰符 (bg-background/50) */
+  --color-background: rgb(var(--bg-primary));
+  --color-background-secondary: rgb(var(--bg-secondary));
+  --color-background-dark: rgb(var(--bg-dark));
+
+  --color-foreground: rgb(var(--fg-primary));
+  --color-foreground-secondary: rgb(var(--fg-secondary));
+  --color-foreground-dark: rgb(var(--fg-dark));
+
+  --color-border: rgb(var(--border-primary));
+  --color-border-dark: rgb(var(--border-dark));
+}
+
+/*
+  在这里定义具体颜色数值
+  注意：为了避免和上面 @theme 里的变量名死循环，我把这里的变量名稍微改了一下(如 --bg-primary)
+*/
+@layer base {
+  :root {
+    /* 只有数字 (R G B) */
+    --bg-primary: 249 250 251; /* gray-50 */
+    --bg-secondary: 243 244 246; /* gray-100 */
+    --bg-dark: 229 231 235; /* gray-200 (示例) */
+
+    --fg-primary: 17 24 39; /* gray-900 */
+    --fg-secondary: 107 114 128; /* gray-500 */
+    --fg-dark: 0 0 0; /* black */
+
+    --border-primary: 209 213 219; /* gray-300 */
+    --border-dark: 156 163 175; /* gray-400 */
+  }
+
+  .dark {
+    --bg-primary: 17 24 39; /* gray-900 */
+    --bg-secondary: 31 41 55; /* gray-800 (加深一点对比度) */
+    --bg-dark: 55 65 81; /* gray-700 */
+
+    --fg-primary: 249 250 251; /* gray-50 */
+    --fg-secondary: 156 163 175; /* gray-400 */
+    --fg-dark: 255 255 255; /* white */
+
+    --border-primary: 55 65 81; /* gray-700 */
+    --border-dark: 75 85 99; /* gray-600 */
+  }
+}

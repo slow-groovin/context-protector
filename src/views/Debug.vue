@@ -52,6 +52,12 @@
               >
                 Vue-Sonner Toast Debug
               </router-link>
+              <router-link
+                to="/debug/color-test"
+                class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
+              >
+                Color Test Page
+              </router-link>
           </div>
         </div>
       </div>

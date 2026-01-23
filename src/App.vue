@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { Toaster } from "vue-sonner";
 import "vue-sonner/style.css";
+import { useDark } from "@vueuse/core";
+
 const isDebugMode = import.meta.env.VITE_DEBUG_MODE === "true";
+const isDark = useDark();
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-background" :class="{ dark: isDark }">
     <Toaster position="top-center" />
 
     <!-- Debug Navigation (only shown in debug mode) -->
@@ -13,10 +16,10 @@ const isDebugMode = import.meta.env.VITE_DEBUG_MODE === "true";
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center space-x-8">
-            <router-link
-              to="/"
-              class="text-gray-900 hover:text-gray-600 font-medium"
-            >
+             <router-link
+               to="/"
+               class="text-foreground hover:text-foreground-secondary font-medium"
+             >
               Home
             </router-link>
             <router-link
