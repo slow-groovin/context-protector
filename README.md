@@ -9,11 +9,11 @@
 **Replace your sensitive data before pasting it to ChatGPT, Claude, Gemini, or any other AI sites**
 
 
-[try it](https://context-protector.api2o.com) 
+<div align="center"><a href="https://context-protector.api2o.com" target="_blank">🌐Try  it</a></div>
 
-[![Usage](./public/usage-video-first.png)](./public/usage.webm)
+![Usage](./public/usage-video-first.png)
 
-<video src="https://raw.githubusercontent.com/slow-groovin/context-protector/refs/heads/main/public/usage.webm" controls width="600" style="max-width: 100%;">
+<video src="https://github.com/user-attachments/assets/5ef7b0ed-f9a3-4d06-af6d-4fffcdfcfdc7" controls  style="max-width: 100%;">
   Your browser does not support the video tag.
 </video>
 
