@@ -1,14 +1,14 @@
-# Context Protector ![Context Protector](/public/icon-192.png)
-
+# Context Protector ![Context Protector](/public/favicon.ico)
+ [中文文档](./README_CN.md) 
 **Protect your privacy when using AI models**
 
 **Replace your sensitive data before pasting it to ChatGPT, Claude, Gemini, or any other AI sites**
 
-[online](https://context-protector.api2o.com) | [中文文档](./README_CN.md) 
+[online](https://context-protector.api2o.com) 
 
 [![Usage](./public/usage-video-first.png)](./public/usage.webm)
 
-<video src="/public/usage.webm" controls width="600" style="max-width: 100%;">
+<video src="https://raw.githubusercontent.com/slow-groovin/context-protector/refs/heads/main/public/usage.webm" controls width="600" style="max-width: 100%;">
   Your browser does not support the video tag.
 </video>
 
