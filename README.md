@@ -1,5 +1,4 @@
-# Context Protector
-![Context Protector](/public/icon-512.png)
+# Context Protector ![Context Protector](/public/icon-192.png)
 
 **Protect your privacy when using AI models**
 
@@ -9,6 +8,9 @@
 
 [![Usage](./public/usage-video-first.png)](./public/usage.webm)
 
+<video src="/public/usage.webm" controls width="600" style="max-width: 100%;">
+  Your browser does not support the video tag.
+</video>
 
 ## ✨ Why Context Protector?
 
