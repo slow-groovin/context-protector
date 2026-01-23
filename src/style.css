@@ -17,6 +17,19 @@
 
   --color-border: rgb(var(--border-primary));
   --color-border-dark: rgb(var(--border-dark));
+
+  /* 新增颜色定义 */
+  --color-button-bg: rgb(var(--button-bg));
+  --color-highlight-bg: rgb(var(--highlight-bg));
+  --color-highlight-fg: rgb(var(--highlight-fg));
+  --color-badge-txt-bg: rgb(var(--badge-txt-bg));
+  --color-badge-txt-fg: rgb(var(--badge-txt-fg));
+  --color-badge-reg-bg: rgb(var(--badge-reg-bg));
+  --color-badge-reg-fg: rgb(var(--badge-reg-fg));
+  --color-cell-red: rgb(var(--cell-red));
+  --color-cell-green: rgb(var(--cell-green));
+  --color-search-button-border: rgb(var(--search-button-border));
+  --color-search-button-bg: rgb(var(--search-button-bg));
 }
 
 /*
@@ -36,6 +49,19 @@
 
     --border-primary: 209 213 219; /* gray-300 */
     --border-dark: 156 163 175; /* gray-400 */
+
+    /* 新增颜色定义 */
+    --button-bg: 255 255 255; /* white */
+    --highlight-bg: 255 255 0; /* yellow */
+    --highlight-fg: 0 0 0; /* black */
+    --badge-txt-bg: 0 0 0; /* black */
+    --badge-txt-fg: 255 255 255; /* white */
+    --badge-reg-bg: 0 0 0; /* black, as requested */
+    --badge-reg-fg: 255 255 255; /* white */
+    --cell-red: 220 38 38; /* red-600, darker for contrast */
+    --cell-green: 21 128 61; /* green-600, darker for contrast */
+    --search-button-border: 59 130 246; /* blue-500, for better contrast */
+    --search-button-bg: 255 255 255; /* white */
   }
 
   .dark {
@@ -49,5 +75,18 @@
 
     --border-primary: 55 65 81; /* gray-700 */
     --border-dark: 75 85 99; /* gray-600 */
+
+    /* 暗黑模式调整 */
+    --button-bg: 75 85 99; /* gray-600, brighter for visibility */
+    --highlight-bg: 255 255 0; /* yellow, keep light bg for dark text */
+    --highlight-fg: 0 0 0; /* black, ensure visibility */
+    --badge-txt-bg: 255 255 255; /* white for contrast on dark bg */
+    --badge-txt-fg: 0 0 0; /* black */
+    --badge-reg-bg: 255 255 255; /* white for contrast on dark bg */
+    --badge-reg-fg: 0 0 0; /* black */
+    --cell-red: 252 165 165; /* red-300, lighter for dark bg */
+    --cell-green: 134 239 172; /* green-300, lighter for dark bg */
+    --search-button-border: 96 165 250; /* blue-400, lighter for contrast */
+    --search-button-bg: 75 85 99; /* gray-600 */
   }
 }

@@ -174,38 +174,38 @@
             v-if="!rule.isEditing"
             class="flex items-center gap-2 p-1.5 pl-2"
           >
-            <!-- Type Badge -->
-            <span
-              :class="[
-                'shrink-0 px-1 rounded text-[10px] font-mono border',
-                rule.matchType === 'regex'
-                  ? 'bg-purple-50 text-purple-700 border-purple-100'
-                  : 'bg-background-secondary text-foreground-secondary border-border',
-              ]"
-            >
-              {{ rule.matchType === "regex" ? "Reg" : "Txt" }}
-            </span>
+             <!-- Type Badge -->
+             <span
+               :class="[
+                 'shrink-0 px-1 rounded text-[10px] font-mono border',
+                 rule.matchType === 'regex'
+                   ? 'bg-badge-reg-bg text-badge-reg-fg border-badge-reg-bg'
+                   : 'bg-badge-txt-bg text-badge-txt-fg border-badge-txt-bg',
+               ]"
+             >
+               {{ rule.matchType === "regex" ? "Reg" : "Txt" }}
+             </span>
 
-            <!-- Match Content (Truncated) -->
-            <div class="flex-1 min-w-0" :title="rule.matchValue">
-              <div
-                class="truncate text-sm font-mono text-red-800 bg-red-50/50 rounded px-1"
-              >
-                {{ rule.matchValue }}
-              </div>
-            </div>
+             <!-- Match Content (Truncated) -->
+             <div class="flex-1 min-w-0" :title="rule.matchValue">
+               <div
+                 class="truncate text-sm font-mono text-black bg-pink-50 rounded px-1"
+               >
+                 {{ rule.matchValue }}
+               </div>
+             </div>
 
             <!-- Arrow -->
             <span class="text-gray-300 shrink-0">→</span>
 
-            <!-- Target Content (Truncated) -->
-            <div class="flex-1 min-w-0" :title="rule.targetValue">
-              <div
-                class="truncate text-sm font-mono text-green-800 bg-green-50/50 rounded px-1"
-              >
-                {{ rule.targetValue || "(空)" }}
-              </div>
-            </div>
+             <!-- Target Content (Truncated) -->
+             <div class="flex-1 min-w-0" :title="rule.targetValue">
+               <div
+                 class="truncate text-sm font-mono text-black bg-green-50 rounded px-1"
+               >
+                 {{ rule.targetValue || "(空)" }}
+               </div>
+             </div>
 
             <!-- Note (Visible if short, truncated if long) -->
             <div
