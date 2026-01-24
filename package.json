@@ -1,13 +1,12 @@
 {
   "name": "context-protector-web",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "build:dev": "vite build --mode development",
-    "build:single": "vue-tsc -b && vite build --mode single",
     "tsc": "vue-tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest"
