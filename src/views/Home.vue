@@ -48,6 +48,9 @@
               class="size-7 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md"
             />
 
+            <!-- Dark Mode Toggle -->
+            <DarkModeToggle />
+
             <router-link
               to="/help"
               class="size-7 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md flex items-center justify-center text-sm font-bold transition-colors"
@@ -274,6 +277,7 @@ import { handleKeyboardShortcuts } from "../utils/shortcuts";
 import { sleep } from "radash";
 import { useI18n } from "../composables/useI18n";
 import LanguageSwitcher from "../components/LanguageSwitcher.vue";
+import DarkModeToggle from "../components/DarkModeToggle.vue";
 import AppFooter from "../components/AppFooter.vue";
 // --- State & Constants ---
 const rulesStore = useRulesStore();
