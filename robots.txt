@@ -1,0 +1,11 @@
+# Allow all crawlers
+User-agent: *
+
+# Disallow debug pages from being indexed
+Disallow: /debug
+
+# Allow all other pages
+Allow: /
+
+# Sitemap location
+Sitemap: /sitemap.xml
