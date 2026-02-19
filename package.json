@@ -9,7 +9,7 @@
     "build": "vue-tsc -b && vite build",
     "build:dev": "vite build --mode development",
     "build:ghpages": "vue-tsc -b && vite build --mode github",
-    "deploy:ghpages": "gh-pages -d dist -r https://github.com/slow-groovin/context-protector.git ",
+    "deploy:ghpages": "gh-pages -d dist ",
     "tsc": "vue-tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest"
