@@ -7,7 +7,7 @@ import { VitePWA } from "vite-plugin-pwa";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const isGitHub = mode === 'github';
-  const base = isGitHub ? '/context-protector-web/' : '/';
+  const base = isGitHub ? '/context-protector/' : '/';
 
   return {
     base,
@@ -31,17 +31,17 @@ export default defineConfig(({ mode }) => {
             "An offline tool to replace sensitive text in your context",
           theme_color: "#ffffff",
           // id: "/",  // 固定应用 ID
-          start_url: isGitHub ? "/context-protector-web/" : "/",
+          start_url: isGitHub ? "/context-protector/" : "/",
           display: "fullscreen", // 👈 关键
           icons: [
             {
-              src: isGitHub ? "/context-protector-web/icon-192.png" : "/icon-192.png",
+              src: isGitHub ? "/context-protector/icon-192.png" : "/icon-192.png",
               sizes: "192x192",
               type: "image/png",
               purpose: "any maskable", // 关键！
             },
             {
-              src: isGitHub ? "/context-protector-web/icon-512.png" : "/icon-512.png",
+              src: isGitHub ? "/context-protector/icon-512.png" : "/icon-512.png",
               sizes: "512x512",
               type: "image/png",
               purpose: "any maskable",
