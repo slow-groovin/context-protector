@@ -3,10 +3,13 @@
   "private": true,
   "version": "0.0.3",
   "type": "module",
+  "homepage": "https://slow-groovin.github.io/context-protector/",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "build:dev": "vite build --mode development",
+    "build:ghpages": "vue-tsc -b && vite build --mode github",
+    "deploy:ghpages": "npm run build:ghpages && cp dist/index.html dist/404.html && gh-pages -d dist",
     "tsc": "vue-tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest"
@@ -30,6 +33,7 @@
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.8.1",
     "autoprefixer": "^10.4.23",
+    "gh-pages": "^6.3.0",
     "jsdom": "^27.4.0",
     "postcss": "^8.5.6",
     "typescript": "~5.9.3",
