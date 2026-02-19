@@ -1,7 +1,7 @@
 {
   "name": "context-protector",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.7",
   "type": "module",
   "homepage": "https://slow-groovin.github.io/context-protector/",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "vue-tsc -b && vite build",
     "build:dev": "vite build --mode development",
     "build:ghpages": "vue-tsc -b && vite build --mode github",
-    "deploy:ghpages": "npm run build:ghpages && cp dist/index.html dist/404.html && gh-pages -d dist",
+    "deploy:ghpages": "gh-pages -d dist -r https://github.com/slow-groovin/context-protector.git ",
     "tsc": "vue-tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest"
